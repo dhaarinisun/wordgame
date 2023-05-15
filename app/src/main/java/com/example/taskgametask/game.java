@@ -162,8 +162,7 @@ check=(Button)findViewById(id.button);
             else{jk.setText("Your Score :0");int i;for( i=0;i<3;i++){
                 del[i].setVisibility(View.GONE);break;}
                 if(i==3){Intent g=new Intent(game.this,MainActivity.class);
-                    g.putExtra("Word",ans);
-                    g.putExtra("Clue",clue);
+
                     startActivity(g);}
 
             }
