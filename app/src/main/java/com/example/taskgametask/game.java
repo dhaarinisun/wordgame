@@ -178,7 +178,7 @@ check=(Button)findViewById(id.button);
 Button playAgain=dialogViewed.findViewById(R.id.button5);
 playAgain.setOnClickListener(new View.OnClickListener() {
     @Override
-    public void onClick(View v) {h.dismiss();
+    public void onClick(View v) {answer.setText("");h.dismiss();
     }
 });
 
