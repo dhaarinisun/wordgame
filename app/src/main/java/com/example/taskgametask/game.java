@@ -35,7 +35,9 @@ EditText answer;
             String clue = getIntent().getStringExtra("Clue");
 answer=
         findViewById(id.editTextTextPersonName6);
-ArrayList<Character>op= new ArrayList<>();int namelength=ans.length();
+ArrayList<Character>op= new ArrayList<>();int namelength=0;
+if(ans.length()!=0){
+    namelength=ans.length();}
 
 for(int i=0;i< namelength;i++){op.add(ans.charAt(i));}
 Collections.shuffle(op);
@@ -60,7 +62,7 @@ Random ran =new Random();
 star1=(ImageView) findViewById(id.iv1);
 star2=(ImageView) findViewById(id.iv2);
 star3=(ImageView) findViewById(id.iv3);
-ImageView[] del=new ImageView[4];
+ImageView[] del=new ImageView[3];
 del[0]=star1;del[1]=star2;del[2]=star3;
 
             if(op.size()!=0){
@@ -154,12 +156,16 @@ check=(Button)findViewById(id.button);
             View dialogViewed=getLayoutInflater().inflate(R.layout.checky,null);
             n.setView(dialogViewed);
             EditText jk=dialogViewed.findViewById(R.id.et);
-            if(answer.equals(ans)){jk.setText("Your Score is 300");}
-            else{jk.setText("Your Score :0");int i;for( i=0;i<4;i++){
-                del[i].setVisibility(View.GONE);
+            AlertDialog h=n.create();
+            h.show();
+            if(answer.equals(getIntent().getStringExtra("Word"))){jk.setText("Your Score is 300");}
+            else{jk.setText("Your Score :0");int i;for( i=0;i<3;i++){
+                del[i].setVisibility(View.GONE);break;}
                 if(i==3){Intent g=new Intent(game.this,MainActivity.class);
+                    g.putExtra("Word",ans);
+                    g.putExtra("Clue",clue);
                     startActivity(g);}
-            }
+
             }
              Button home=dialogViewed.findViewById(R.id.button4);
              home.setOnClickListener(new View.OnClickListener() {
@@ -173,16 +179,11 @@ check=(Button)findViewById(id.button);
 Button playAgain=dialogViewed.findViewById(R.id.button5);
 playAgain.setOnClickListener(new View.OnClickListener() {
     @Override
-    public void onClick(View v) {
-        Intent b=new Intent(game.this,game.class);
-        b.putExtra("Same",ans);
-        b.putExtra("Sametoo",clue);
-        startActivity(b);
+    public void onClick(View v) {h.dismiss();
     }
 });
 
-            AlertDialog h=n.create();
-            h.show();
+
         }
     });
 reset=(Button)findViewById(id.button3);
