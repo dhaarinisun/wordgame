@@ -23,12 +23,13 @@ import java.util.Random;
 
 public class game extends AppCompatActivity {
 EditText answer;
-    private int score = 0;
+
     Button check;ImageButton clued;
     ImageView star1,star2,star3;
     Button reset;
     TextView t21,t22,t23,t24,t25,t26,t27,t28,t29,t30,t31,t32,t33,t34,t35,t36;
     Intent startIntent;
+    int hearts=0;
         protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.game);
@@ -64,7 +65,7 @@ Random ran =new Random();
 star1=(ImageView) findViewById(id.iv1);
 star2=(ImageView) findViewById(id.iv2);
 star3=(ImageView) findViewById(id.iv3);
-ImageView[] del=new ImageView[3];
+ImageView[]del=new ImageView[3];
 del[0]=star1;del[1]=star2;del[2]=star3;
 
             if(op.size()!=0){
@@ -160,15 +161,15 @@ check=(Button)findViewById(id.button);
             EditText jk=dialogViewed.findViewById(R.id.et);
             AlertDialog h=n.create();
             h.show();
-            boolean cond=answer.equals(ans);
+            boolean cond=ans.equals(answer.getText().toString());
             if(cond){jk.setText("Your Score is 300");}
-            else{jk.setText("Your Score :0");int i;for( i=0;i<3;i++){
-                del[i].setVisibility(View.GONE);break;}
-                if(i==3){Intent g=new Intent(game.this,MainActivity.class);
 
-                    startActivity(g);}
+           else{jk.setText("Your Score is 0");if(hearts<3){del[hearts].setVisibility(View.GONE);hearts++;}
+              else{ Intent g=new Intent(game.this,MainActivity.class);
 
-            }
+                    startActivity(g);}}
+
+
              Button home=dialogViewed.findViewById(R.id.button4);
              home.setOnClickListener(new View.OnClickListener() {
                  @Override
