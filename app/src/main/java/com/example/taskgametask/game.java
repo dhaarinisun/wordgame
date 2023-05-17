@@ -28,11 +28,13 @@ EditText answer;
     ImageView star1,star2,star3;
     Button reset;
     TextView t21,t22,t23,t24,t25,t26,t27,t28,t29,t30,t31,t32,t33,t34,t35,t36;
+    Intent startIntent;
         protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.game);
             String ans=getIntent().getStringExtra("Word");
             String clue = getIntent().getStringExtra("Clue");
+            startIntent=getIntent();
 answer=
         findViewById(id.editTextTextPersonName6);
 ArrayList<Character>op= new ArrayList<>();int namelength=0;
@@ -158,7 +160,8 @@ check=(Button)findViewById(id.button);
             EditText jk=dialogViewed.findViewById(R.id.et);
             AlertDialog h=n.create();
             h.show();
-            if(answer.equals(getIntent().getStringExtra("Word"))){jk.setText("Your Score is 300");}
+            boolean cond=answer.equals(ans);
+            if(cond){jk.setText("Your Score is 300");}
             else{jk.setText("Your Score :0");int i;for( i=0;i<3;i++){
                 del[i].setVisibility(View.GONE);break;}
                 if(i==3){Intent g=new Intent(game.this,MainActivity.class);
@@ -189,10 +192,9 @@ reset=(Button)findViewById(id.button3);
 reset.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        Intent i=new Intent(game.this,game.class);
-        i.putExtra("Word",ans);
-        i.putExtra("Clue",clue);
-        startActivity(i);
+        finish();
+        startIntent.putExtra("Word",ans);
+        startIntent.putExtra("Clue",clue);startActivity(startIntent);
     }
 });
 
